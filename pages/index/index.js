@@ -17,31 +17,38 @@ Page({
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
+      wx.showLoading({
+        title: '正在登陆',
+      })
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        hasUserInfo: true 
       })
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../main/main',
       })
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
+        wx.showLoading({
+          title: '正在登陆',
+        })
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../main/main',
         }) 
       }
-          
-
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
+          wx.showLoading({
+            title: '正在登陆',
+          })
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
@@ -78,7 +85,7 @@ Page({
             title: '登陆成功',
             duration: 1000
           })
-        },
+        }
       })
     }, err => {
       // **err 有两种情况**：用户拒绝授权，HError 对象上会包含基本用户信息：id、openid、unionid；其他类型的错误，如网络断开、请求超时等，将返回 HError 对象

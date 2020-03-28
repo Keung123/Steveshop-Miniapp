@@ -12,7 +12,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.hideLoading({
+      complete: (res) => {
+        wx.showToast({
+          title: '登陆成功',
+          duration: 1000
+        })
+      }
+    })
   },
 
   /**
@@ -26,7 +33,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideHomeButton({
+      complete: (res) => {},
+    })
+    wx.hide
   },
 
   /**
