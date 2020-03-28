@@ -1,2 +1,8 @@
 <!--pages/main.wxml-->
-<text>pages/main.wxml</text>
+<view class="userinfo">
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  <text class="userinfo-welcome">欢迎</text>
+  <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+  <text class="userinfo-nickname">Keung</text>
+  
+</view>
