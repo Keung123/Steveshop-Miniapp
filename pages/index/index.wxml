@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container">
+  <image wx:if="{{!hasUserInfo}}" class="register-icon" src="/res/img/register.png" mode="aspectFit"></image>
+  <block wx:else>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  </block>
+  <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler">用户授权</button>
+  <!-- <view class="userinfo"> -->
+    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block> -->
+  <!-- </view> -->
+  <!-- <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view> -->
+</view>
