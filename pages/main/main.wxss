@@ -46,21 +46,27 @@
 
 .text-gray {
   font-family: '宋体';
-  display: inline-block;
+  display: inline-flex;
+  /* flex-direction: row;
+  flex-wrap: nowrap; */
   color: rgb(255, 255, 255);
   font-size: medium;
   font-weight: 800;
   letter-spacing: 5rpx;
   text-align: center;
-  margin-left: 100rpx;
-  margin-top: 100rpx;
+  margin-left: 90rpx;
+  margin-top: 140rpx;
 }
 
 .button-gray {
-  height: 64rpx;
-  width: 64rpx;
-  margin-left: 83%;
-  
+  display: inline-flex;
+  /* flex-direction: row;
+  flex-wrap: nowrap; */
+  height: 48rpx;
+  width: 48rpx;
+  margin-top: 22%;
+  margin-left: 36%;
+  position: absolute;
 }
 
 

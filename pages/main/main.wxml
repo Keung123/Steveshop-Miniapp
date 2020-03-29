@@ -9,7 +9,7 @@
 <view class="card">
   <view class="card-gray" >
     <text class="text-gray">添加你的订阅</text>
-    <image class="button-gray" bindtap="addSubscribe" src="/res/img/add.png" mode="cover"></image>
+    <image class="button-gray" bindtap="addSubscribe" src="/res/img/add.png" mode="aspectFit"></image>
   </view>
 </view>
 
