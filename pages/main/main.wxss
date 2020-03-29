@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin-left: 100rpx;
+  margin-left: 70rpx;
   margin-top: 100rpx;
 }
 
@@ -19,7 +19,7 @@
 .userinfo-welcome {
   color: #aaa;
   margin-left: 168rpx;
-  margin-top: 12rpx;
+  margin-top: 12rpx;  
 }
 
 .userinfo-nickname {
@@ -28,4 +28,35 @@
   font-size: large;
   margin-left: 168rpx;
   margin-top: 10rpx;
+}
+
+.card {
+  margin-top: 150rpx;
+}
+
+.card-gray {
+  height: 250rpx;
+  width: 85%;
+  border-radius: 15px;
+  background-color: #ccccccda;
+  box-shadow: 4px 4px 8px #cccccccc;
+  margin-left: 7%;
+  position: relative;
+}
+
+.text-gray {
+  font-family: '宋体';
+  display: inline-block;
+  color: rgb(255, 255, 255);
+  font-size: medium;
+  font-weight: 800;
+  letter-spacing: 5rpx;
+  text-align: center;
+  margin-left: 100rpx;
+  margin-top: 100rpx;
+}
+
+
+.notification {
+  margin: 100rpx;
 }

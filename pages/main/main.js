@@ -7,7 +7,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    userInfo: {},
+    id: '', // 订阅消息模版 ID
+  },
+
+  handleIdChange(e) {
+    this.setData({
+      id: e.detail.value,
+    })
+  },
+
+  subscribeMessage: function (e) {
+    wx.requestSubscribeMessage({
+      tmplIds: [this.data.id],
+      success: (res) => {
+        // 用户在真机上同意上报订阅消息
+        let subscription = []
+        if (res[this.data.id] === 'accept') {
+          subscription.push({
+            template_id: this.data.id,
+            subscription_type: 'once',
+          })
+        }
+        wx.BaaS.subscribeMessage({subscription}).then(res => {
+          // success
+        }, err => {
+          // error
+        })
+      },
+      fail: (err) => {
+        // fail
+      }
+    })
   },
 
   /**
