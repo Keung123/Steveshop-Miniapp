@@ -2,18 +2,18 @@
 <view class="userinfo">
   <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
   <text class="userinfo-welcome">欢迎</text>
-  <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-  <text class="userinfo-nickname">Keung</text>
+  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <!-- <text class="userinfo-nickname">Keung</text> -->
 </view>
 
 <view class="card">
   <view class="card-gray" >
     <text class="text-gray">添加你的订阅</text>
-    <view bindtap="onItemClick"></view>
+    <image class="button-gray" bindtap="addSubscribe" src="/res/img/add.png" mode="cover"></image>
   </view>
 </view>
 
-<view class="notification">
+<!-- <view class="notification">
   填写模板 ID：
   <input
     type="text"
@@ -22,4 +22,4 @@
   <button class="zan-btn" bindtap="subscribeMessage">
     订阅消息
   </button>
-</view>
+</view> -->

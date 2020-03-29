@@ -56,6 +56,13 @@
   margin-top: 100rpx;
 }
 
+.button-gray {
+  height: 64rpx;
+  width: 64rpx;
+  margin-left: 83%;
+  
+}
+
 
 .notification {
   margin: 100rpx;

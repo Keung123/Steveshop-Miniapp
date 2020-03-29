@@ -17,6 +17,13 @@ Page({
     })
   },
 
+  addSubscribe: function(e) {
+    wx.showToast({
+      title: '待开发',
+      icon: 'none'
+    })
+  },
+
   subscribeMessage: function (e) {
     wx.requestSubscribeMessage({
       tmplIds: [this.data.id],
