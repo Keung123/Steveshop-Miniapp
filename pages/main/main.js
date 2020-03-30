@@ -2,29 +2,21 @@
 const app = getApp()
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     userInfo: {},
     isVIP: null,
-    id: '', // 订阅消息模版 ID
+    weeklyKey: null,
   },
 
-  handleIdChange(e) { // 订阅消息填写
+  reload: function() {
     this.setData({
-      id: e.detail.value,
+      isVIP: app.globalData.isVIP
     })
   },
 
   testVIPStatus: function() {
     app.globalData.isVIP = !app.globalData.isVIP
-    this.setData({
-      isVIP: app.globalData.isVIP
-    })
-    console.log(app.globalData.isVIP)
-    console.log(this.data.isVIP)
+    this.reload()
   },
 
   addSubscribe: function() {
@@ -35,43 +27,29 @@ Page({
   },
 
   copyKey: function() {
-    wx.showToast({
-      title: '待开发：复制密钥',
-      icon: 'none'
-    }) 
-  },
-
-  subscribeMessage: function (e) {
-    wx.requestSubscribeMessage({
-      tmplIds: [this.data.id],
-      success: (res) => {
-        // 用户在真机上同意上报订阅消息
-        let subscription = []
-        if (res[this.data.id] === 'accept') {
-          subscription.push({
-            template_id: this.data.id,
-            subscription_type: 'once',
-          })
-        }
-        wx.BaaS.subscribeMessage({subscription}).then(res => {
-          // success
-        }, err => {
-          // error
+    wx.setClipboardData({
+      data: this.data.weeklyKey,
+      success(res) {
+        wx.showToast({
+          title: '已复制到剪贴板',
+          duration: 700          
         })
       },
-      fail: (err) => {
-        // fail
+      fail(res) {
+        wx.showToast({
+          title: '复制失败（待开发：手动复制）',
+          icon: 'none',
+          duration: 1000
+        })
       }
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       userInfo: app.globalData.userInfo,
-      isVIP: app.globalData.isVIP
+      isVIP: app.globalData.isVIP,
+      weeklyKey: '',
     })
     wx.hideLoading({
       complete: (res) => {
@@ -83,16 +61,6 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     wx.hideHomeButton({
       complete: (res) => {},
@@ -100,37 +68,19 @@ Page({
     wx.hide
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
 
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function () {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }

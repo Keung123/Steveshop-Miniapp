@@ -31,25 +31,25 @@
 }
 
 .card {
-  margin-top: 150rpx;
+  margin-top: 200rpx;
 }
 
 .card-gray {
-  height: 250rpx;
+  height: 300rpx;
   width: 85%;
-  border-radius: 15px;
-  background-color: #ccccccda;
-  box-shadow: 4px 4px 8px #cccccccc;
+  border-radius: 30rpx;
+  background-color: #cccccc;
+  box-shadow: 4px 4px 8px #cccccc;
   margin-left: 7%;
   position: relative;
 }
 
 .card-green {
-  height: 250rpx;
+  height: 300rpx;
   width: 85%;
-  border-radius: 15px;
-  background-color: #6bd64ad2;
-  box-shadow: 4px 4px 8px #cccccccc;
+  border-radius: 30rpx;
+  background-color: #6bd64a;
+  box-shadow: 4px 4px 8px #cccccc;
   margin-left: 7%;
   position: relative;
 }
@@ -57,15 +57,12 @@
 .text-gray {
   font-family: '宋体';
   display: inline-flex;
-  /* flex-direction: row;
-  flex-wrap: nowrap; */
   color: rgb(255, 255, 255);
   font-size: medium;
   font-weight: 800;
   letter-spacing: 5rpx;
-  text-align: center;
   margin-left: 90rpx;
-  margin-top: 140rpx;
+  margin-top: 200rpx;
 }
 
 .button-gray {
@@ -74,7 +71,7 @@
   flex-wrap: nowrap; */
   height: 48rpx;
   width: 48rpx;
-  margin-top: 22%;
+  margin-top: 200rpx;
   margin-left: 36%;
   position: absolute;
 }
