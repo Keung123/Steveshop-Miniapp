@@ -6,12 +6,26 @@
   <!-- <text class="userinfo-nickname">Keung</text> -->
 </view>
 
-<view class="card">
+<view class="card" wx:if="{{!isVIP}}">
   <view class="card-gray" >
     <text class="text-gray">添加你的订阅</text>
     <image class="button-gray" bindtap="addSubscribe" src="/res/img/add.png" mode="aspectFit"></image>
   </view>
 </view>
+
+<view class="card" wx:else>
+  <view class="card-green" >
+    <text class="text-gray">复制本周密钥</text>
+    <image class="button-gray" bindtap="copyKey" src="/res/img/copy.png" mode="aspectFit"></image>
+  </view>
+</view>
+
+<view style="margin: 200rpx">
+  <text style="font-size: small; margin:20rpx">测试用：{{isVIP ? "有订阅" : "无订阅"}}</text>
+  <switch style="margin-top:20rpx" checked="{{isVIP}}" bindchange="testVIPStatus"/>
+</view>
+
+
 
 <!-- <view class="notification">
   填写模板 ID：

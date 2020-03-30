@@ -8,20 +8,37 @@ Page({
    */
   data: {
     userInfo: {},
+    isVIP: null,
     id: '', // 订阅消息模版 ID
   },
 
-  handleIdChange(e) {
+  handleIdChange(e) { // 订阅消息填写
     this.setData({
       id: e.detail.value,
     })
   },
 
-  addSubscribe: function(e) {
-    wx.showToast({
-      title: '待开发',
-      icon: 'none'
+  testVIPStatus: function() {
+    app.globalData.isVIP = !app.globalData.isVIP
+    this.setData({
+      isVIP: app.globalData.isVIP
     })
+    console.log(app.globalData.isVIP)
+    console.log(this.data.isVIP)
+  },
+
+  addSubscribe: function() {
+    wx.showToast({
+      title: '待开发：添加订阅',
+      icon: 'none'
+    })  
+  },
+
+  copyKey: function() {
+    wx.showToast({
+      title: '待开发：复制密钥',
+      icon: 'none'
+    }) 
   },
 
   subscribeMessage: function (e) {
@@ -53,7 +70,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      isVIP: app.globalData.isVIP
     })
     wx.hideLoading({
       complete: (res) => {

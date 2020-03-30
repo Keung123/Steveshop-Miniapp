@@ -44,6 +44,16 @@
   position: relative;
 }
 
+.card-green {
+  height: 250rpx;
+  width: 85%;
+  border-radius: 15px;
+  background-color: #6bd64ad2;
+  box-shadow: 4px 4px 8px #cccccccc;
+  margin-left: 7%;
+  position: relative;
+}
+
 .text-gray {
   font-family: '宋体';
   display: inline-flex;

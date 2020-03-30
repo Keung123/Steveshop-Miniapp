@@ -9,12 +9,18 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+
+  checkVIP: function() {
+    app.globalData.isVIP = false
+  },
+
+  login: function() {
+    this.checkVIP()
+    wx.redirectTo({
+      url: '../main/main',
     })
   },
+
   onLoad: function () {
     if (app.globalData.userInfo) {
       wx.showLoading({
@@ -24,9 +30,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true 
       })
-      wx.redirectTo({
-        url: '../main/main',
-      })
+      this.login()
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -38,9 +42,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        wx.redirectTo({
-          url: '../main/main',
-        }) 
+        this.login()
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -54,9 +56,7 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-          wx.navigateTo({
-            url: '../main/main',
-          }) 
+          this.login()
         }
       })
     }
@@ -76,9 +76,7 @@ Page({
     wx.BaaS.auth.loginWithWechat(data, {syncUserProfile: 'overwrite'}).then(user => {
       // user 包含用户完整信息，详见下方描述
       console.log(user)
-      wx.navigateTo({
-        url: '../main/main'
-      })
+      this.login()
       wx.hideLoading({
         complete: (res) => {
           wx.showToast({
