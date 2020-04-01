@@ -6,6 +6,8 @@ Page({
     userInfo: {},
     isVIP: null,
     weeklyKey: null,
+    cardExpended: false,
+    inviteCode: '',
   },
 
   reload: function() {
@@ -19,11 +21,24 @@ Page({
     this.reload()
   },
 
+  expendCard: function() {
+    this.setData({
+      cardExpended: true
+    })
+  },
+
+  bindInputBlur: function(e) {
+    this.setData({
+      inviteCode: e.detail.value,
+    })
+  },
+
   addSubscribe: function() {
-    wx.showToast({
-      title: '待开发：添加订阅',
-      icon: 'none'
-    })  
+    console.log(this.data.inviteCode)
+    this.setData({
+      cardExpended: false
+    })
+    this.testVIPStatus()
   },
 
   copyKey: function() {

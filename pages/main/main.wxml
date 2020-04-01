@@ -6,15 +6,24 @@
   <!-- <text class="userinfo-nickname">Keung</text> -->
 </view>
 
-<view class="card">
-  <view class="card-gray" wx:if="{{!isVIP}}">
+<view class="card" wx:if="{{!isVIP}}">
+  <view class="card-gray" wx:if="{{!cardExpended}}">
     <text class="text-gray">添加你的订阅</text>
-    <image class="button-gray" bindtap="addSubscribe" src="/res/img/add.png" mode="aspectFit"></image>
+    <image class="button-down" bindtap="expendCard" src="/res/img/add.png" mode="aspectFit"></image>
   </view>
 
-  <view class="card-green" wx:else>
+  <view class="card-expended" wx:else>
+    <input class="card-input" auto-focus placeholder="在此处粘贴" placeholder-class="card-input-placeholder" bindblur="bindInputBlur"/>
+    <text class="text-expended">请输入邀请码</text>
+    <image class="button-expended" bindtap="addSubscribe" src=" /res/img/confirm.png" mode="aspectFit"></image>
+  </view>
+</view>
+
+<view class="card" wx:else>
+  <view class="card-green">
     <text class="text-gray">复制本周密钥</text>
-    <image class="button-gray" bindtap="copyKey" src="/res/img/copy.png" mode="aspectFit"></image>
+    <image class="button-down" bindtap="copyKey" src="/res/img/copy.png" mode="aspectFit"></image>
+    <!-- <image class="button-up" src="/res/img/key.png" mode="aspectFit"></image> -->
   </view>
 </view>
 
