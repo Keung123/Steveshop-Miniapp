@@ -2,8 +2,10 @@
 <view class="userinfo">
   <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
   <text class="userinfo-welcome">欢迎</text>
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  <!-- <text class="userinfo-nickname">Keung</text> -->
+  <image wx:if="{{!isVIP}}" class="userinfo-vip" src="/res/img/VIP_dark.png" mode="cover"></image>
+  <image wx:else class="userinfo-vip" src="/res/img/VIP_light.png" mode="cover"></image>
+  <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+  <text class="userinfo-nickname">Keung</text>
 </view>
 
 <view class="card" wx:if="{{!isVIP}}">
@@ -12,7 +14,7 @@
     <image class="button-down" bindtap="expendCard" src="/res/img/add.png" mode="aspectFit"></image>
   </view>
 
-  <view class="card-expended" wx:else>
+  <view class="card-gray-expended" wx:else>
     <input class="card-input" auto-focus placeholder="在此处粘贴" placeholder-class="card-input-placeholder" bindblur="bindInputBlur"/>
     <text class="text-expended">请输入邀请码</text>
     <image class="button-expended" bindtap="addSubscribe" src=" /res/img/confirm.png" mode="aspectFit"></image>
@@ -20,16 +22,26 @@
 </view>
 
 <view class="card" wx:else>
-  <view class="card-green">
+  <view class="card-green" wx:if="{{!cardExpended}}">
     <text class="text-gray">复制本周密钥</text>
     <image class="button-down" bindtap="copyKey" src="/res/img/copy.png" mode="aspectFit"></image>
     <!-- <image class="button-up" src="/res/img/key.png" mode="aspectFit"></image> -->
+  </view>
+
+  <view class="card-gray-expended" wx:else>
+    <view class="card-input">
+      <text selectable class="card-input-placeholder">{{weeklyKey}}</text> 
+    </view>
+    <text class="text-expended">选中手动复制</text>
+    <image class="button-expended" bindtap="foldCard" src=" /res/img/confirm.png" mode="aspectFit"></image>
   </view>
 </view>
 
 <view style="margin: 200rpx">
   <text style="font-size: small; margin:20rpx">测试用：{{isVIP ? "有订阅" : "无订阅"}}</text>
   <switch style="margin-top:20rpx" checked="{{isVIP}}" bindchange="testVIPStatus"/>
+  <text style="font-size: small; margin:20rpx">测试用：{{cardExpended ? "已展开" : "未展开"}}</text>
+  <switch style="margin-top:20rpx" checked="{{cardExpended}}" bindchange="testCardExpend"/>
 </view>
 
 

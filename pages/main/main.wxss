@@ -16,6 +16,15 @@
   position: absolute;
 }
 
+.userinfo-vip {
+  width: 64rpx;
+  height: 64rpx;
+  align-items: center;
+  margin-top: 3rpx;
+  margin-left: 73%;
+  position: absolute;
+}
+
 .userinfo-welcome {
   color: #aaa;
   margin-left: 168rpx;
@@ -54,7 +63,7 @@
   position: relative;
 }
 
-.card-expended {
+.card-gray-expended {
   height: 400rpx;
   width: 85%;
   border-radius: 30rpx;

@@ -21,9 +21,21 @@ Page({
     this.reload()
   },
 
+  testCardExpend: function() {
+    this.setData({
+      cardExpended: !this.data.cardExpended
+    })
+  },
+
   expendCard: function() {
     this.setData({
       cardExpended: true
+    })
+  },
+
+  foldCard: function() {
+    this.setData({
+      cardExpended: false
     })
   },
 
@@ -52,10 +64,11 @@ Page({
       },
       fail(res) {
         wx.showToast({
-          title: '复制失败（待开发：手动复制）',
+          title: '复制失败，请手动复制',
           icon: 'none',
           duration: 1000
         })
+        this.expendCard()
       }
     })
   },
@@ -64,7 +77,7 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo,
       isVIP: app.globalData.isVIP,
-      weeklyKey: '',
+      weeklyKey: 'Test',
     })
     wx.hideLoading({
       complete: (res) => {
