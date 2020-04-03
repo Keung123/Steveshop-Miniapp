@@ -134,7 +134,24 @@
   letter-spacing: 5rpx;
 }
 
+.admin-func {
+  margin-top: 350rpx;
+}
 
-.notification {
-  margin: 100rpx;
+.text-admin-func {
+  margin-top: 100rpx;
+  margin-left: 125rpx;
+  font-family: '宋体';
+  color: rgb(71, 71, 71);
+  font-size: medium;
+  font-weight: 800;
+  letter-spacing: 5rpx;
+}
+
+.button-admin-func {
+  display: inline-flex;
+  height: 64rpx;
+  width: 64rpx;
+  margin-top: 50rpx;
+  position: absolute;
 }

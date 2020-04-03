@@ -7,17 +7,71 @@ Page({
     motto: '只要出发，不要目的',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
 
-  checkVIP: function() {
-    app.globalData.isVIP = false
+  getOpenId: res => {
+    wx.BaaS.auth.getCurrentUser().then( user => {
+      let id = user.get('openid')
+      app.globalData.openId = id
+      console.log(app.globalData.openId)
+      return res(true)
+    })
+  },
+
+  fetchDB: res => {
+    let adminUser = new wx.BaaS.TableObject('admin')
+    let vipUser = new wx.BaaS.TableObject('vip')
+    let query = new wx.BaaS.Query()
+
+    let regExp = new RegExp('^' + app.globalData.openId + '$')
+    console.log(regExp.source)
+    query.matches('openid', regExp)
+    
+    // isAdmin?
+    adminUser.setQuery(query).find().then( res => {
+      let result = res.data.objects[0]  
+      if(typeof(result) == "object") {
+        app.globalData.isAdmin = result.enabled
+      }
+      else {
+        app.globalData.isAdmin = false
+      }
+    }, err => {
+      wx.showToast({
+        title: '获取数据库失败，请重新进入小程序',
+        icon: 'none',
+      })
+      console.log(err)
+    })
+
+    // isVIP?
+    vipUser.setQuery(query).find().then( res => {
+      let result = res.data.objects[0]
+      if(typeof(result) == "object") {
+        app.globalData.isVIP = result.enabled
+      }
+      else {
+        app.globalData.isVIP = false
+      }
+    }, err => {
+      wx.showToast({
+        title: '获取数据库失败，请重新进入小程序',
+        icon: 'none',
+      })
+      console.log(err)
+    })
+
+    return res(true)
   },
 
   login: function() {
-    this.checkVIP()
-    wx.redirectTo({
-      url: '../main/main',
+    this.getOpenId( res => {
+      this.fetchDB( cb => {
+        wx.redirectTo({
+          url: '../main/main',
+        })  
+      })
     })
   },
 

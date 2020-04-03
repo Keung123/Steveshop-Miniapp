@@ -5,6 +5,8 @@ Page({
   data: {
     userInfo: {},
     isVIP: null,
+    isAdmin: null,
+    showTesting: null,
     weeklyKey: null,
     cardExpended: false,
     inviteCode: '',
@@ -13,6 +15,12 @@ Page({
   reload: function() {
     this.setData({
       isVIP: app.globalData.isVIP
+    })
+  },
+
+  changeTestingStatus: function() {
+    this.setData({
+      showTesting: !this.data.showTesting
     })
   },
 
@@ -56,13 +64,13 @@ Page({
   copyKey: function() {
     wx.setClipboardData({
       data: this.data.weeklyKey,
-      success(res) {
+      success: res => {
         wx.showToast({
-          title: '已复制到剪贴板',
-          duration: 700          
+          title: '内容已复制',
+          duration: 600          
         })
       },
-      fail(res) {
+      fail: res => {
         wx.showToast({
           title: '复制失败，请手动复制',
           icon: 'none',
@@ -77,6 +85,8 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo,
       isVIP: app.globalData.isVIP,
+      isAdmin: app.globalData.isAdmin,
+      showTesting: false,
       weeklyKey: 'Test',
     })
     wx.hideLoading({

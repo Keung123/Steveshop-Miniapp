@@ -33,7 +33,6 @@ App({
         }
       }
     })
-
     wx.BaaS = requirePlugin('sdkPlugin')
     //让插件帮助完成登录、支付等功能
     wx.BaaS.wxExtend(wx.login, wx.getUserInfo, wx.requestPayment)
@@ -41,12 +40,15 @@ App({
     let clientID = '9aea0063c2508d265c5f'  // 应用名称: Steveshop
     wx.BaaS.init(clientID)
     // 静默登陆
-    wx.BaaS.auth.loginWithWechat().then(user => {
+    wx.BaaS.auth.loginWithWechat().then( user => {
       // console.log(user)
     })
   },
+
   globalData: {
     userInfo: null,
+    openId: null,
     isVIP: null,
+    isAdmin: null,
   }
 })

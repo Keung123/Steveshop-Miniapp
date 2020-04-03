@@ -4,8 +4,8 @@
   <text class="userinfo-welcome">欢迎</text>
   <image wx:if="{{!isVIP}}" class="userinfo-vip" src="/res/img/VIP_dark.png" mode="cover"></image>
   <image wx:else class="userinfo-vip" src="/res/img/VIP_light.png" mode="cover"></image>
-  <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-  <text class="userinfo-nickname">Keung</text>
+  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <!-- <text class="userinfo-nickname">Keung</text> -->
 </view>
 
 <view class="card" wx:if="{{!isVIP}}">
@@ -37,22 +37,26 @@
   </view>
 </view>
 
-<view style="margin: 200rpx">
-  <text style="font-size: small; margin:20rpx">测试用：{{isVIP ? "有订阅" : "无订阅"}}</text>
-  <switch style="margin-top:20rpx" checked="{{isVIP}}" bindchange="testVIPStatus"/>
-  <text style="font-size: small; margin:20rpx">测试用：{{cardExpended ? "已展开" : "未展开"}}</text>
-  <switch style="margin-top:20rpx" checked="{{cardExpended}}" bindchange="testCardExpend"/>
+<view style="margin-top: 200rpx; margin-left: 200rpx;" wx:if="{{isAdmin}}">
+  <view wx:if="{{showTesting}}">
+    <text style="font-size: small; margin:20rpx">测试用：{{isVIP ? "有订阅" : "无订阅"}}</text>
+    <switch style="margin-top:20rpx" checked="{{isVIP}}" bindchange="testVIPStatus"/>
+    <view style="margin-left: 40rpx"></view>
+    <text style="font-size: small; margin:20rpx; display: inline-flex">测试用：{{cardExpended ? "已展开" : "未展开"}}</text>
+    <switch style="margin-top:20rpx" checked="{{cardExpended}}" bindchange="testCardExpend"/>
+    <view style="margin-left: 40rpx"></view>
+    <text style="font-size: small; margin:20rpx; display: inline-flex">Admin: {{isAdmin}}</text>
+    <view style="margin-left: 100rpx"></view>
+    <!-- <text style="font-size: small; margin:20rpx; display: inline-flex">VIP: {{isVIP}}</text> -->
+    <image style="height: 48rpx; width: 48rpx; margin-left: 70%; margin-top: 50rpx" bindtap="changeTestingStatus" src="/res/img/close.png" mode="aspectFit"></image>
+  </view>
+  <view class="admin-func" wx:else>
+    <text class="text-admin-func">管理员</text>
+    <view style="margin-left: 50rpx; margin-top: 20rpx">
+      <image class="button-admin-func" style="height: 56rpx; width: 56rpx;" bindtap="" src="/res/img/edit.png" mode="aspectFit"></image>
+    </view>
+    <view style="margin-left: 250rpx; margin-top: 20rpx">
+      <image class="button-admin-func" bindtap="changeTestingStatus" src="/res/img/testing.png" mode="aspectFit"></image>
+    </view>
+  </view>
 </view>
-
-
-
-<!-- <view class="notification">
-  填写模板 ID：
-  <input
-    type="text"
-    placeholder="请输入模版 ID"
-    bindinput="handleIdChange" />
-  <button class="zan-btn" bindtap="subscribeMessage">
-    订阅消息
-  </button>
-</view> -->
