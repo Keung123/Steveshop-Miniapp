@@ -14,7 +14,14 @@ Page({
 
   reload: function() {
     this.setData({
-      isVIP: app.globalData.isVIP
+      isVIP: app.globalData.isVIP,
+      isAdmin: app.globalData.isAdmin,
+    })
+  },
+
+  goInviteManager: function() {
+    wx.navigateTo({
+      url: '../invitemanager/invitemanager',
     })
   },
 
@@ -112,14 +119,7 @@ Page({
 
 
   onPullDownRefresh: function () {
-
-  },
-
-  onReachBottom: function () {
-
-  },
-
-  onShareAppMessage: function () {
-
+    this.reload()
+    wx.stopPullDownRefresh()
   }
 })

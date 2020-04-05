@@ -14,7 +14,7 @@ Page({
     wx.BaaS.auth.getCurrentUser().then( user => {
       let id = user.get('openid')
       app.globalData.openId = id
-      console.log(app.globalData.openId)
+      // console.log(app.globalData.openId)
       return res(true)
     })
   },
@@ -25,13 +25,13 @@ Page({
     let query = new wx.BaaS.Query()
 
     let regExp = new RegExp('^' + app.globalData.openId + '$')
-    console.log(regExp.source)
+    // console.log(regExp.source)
     query.matches('openid', regExp)
     
     // isAdmin?
     adminUser.setQuery(query).find().then( res => {
       let result = res.data.objects[0]  
-      if(typeof(result) == "object") {
+      if(typeof(result) == 'object') {
         app.globalData.isAdmin = result.enabled
       }
       else {

@@ -1,0 +1,76 @@
+/* pages/invitemanager/invitemanager.wxss */
+
+.item_content{
+  width: 90%;
+  height: 100rpx;
+  font-size: 11pt;
+  color: #888;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.item_from{
+  width: 550rpx;
+  font-size: 10pt;
+  color: #999;
+}
+.item_time{
+  width: 100%;
+  font-size: 10pt;
+  color: #999;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left: 40rpx;
+}
+.hover-class{
+  background-color: #A4D3EE;
+}
+
+
+
+.func-bar {
+  position: fixed;
+  bottom: 0;
+  height: 400rpx;
+  width: 100%;
+  background-color: #3a51d1;
+  border-radius: 3rpx;
+}
+
+.label-white {
+  color: #eae9e3;
+  font-size: medium;
+  font-weight: 400;
+  letter-spacing: 5rpx;
+}
+
+.length {
+  justify-content: center;
+  display: inline-flex;
+  margin-left: 40rpx;
+  margin-top: 40rpx;
+}
+
+.note {
+  justify-content: center;
+  display: inline-flex;
+  margin-left: 10rpx;
+  margin-top: 20rpx;
+  width: 60%;
+  height: 55rpx;
+  background-color: #3448bd;
+  border-radius: 10rpx;
+}
+
+.picker {
+  justify-content: center;
+  display: inline-flex;
+  background-color: #3448bd;
+  border-radius: 10rpx;
+  margin-left: 10rpx;
+  margin-top: 20rpx;
+  width: 60%;
+  height: 55rpx;
+    /* line-height: 55rpx; */
+}
