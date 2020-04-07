@@ -40,7 +40,7 @@
 <view style="margin-top: 200rpx; margin-left: 200rpx;" wx:if="{{isAdmin}}">
   <view wx:if="{{showTesting}}">
     <text style="font-size: small; margin:20rpx">测试用：{{isVIP ? "有订阅" : "无订阅"}}</text>
-    <switch style="margin-top:20rpx" checked="{{isVIP}}" bindchange="testVIPStatus"/>
+    <switch style="margin-top:20rpx" checked="{{isVIP}}" bindchange="changeVIPStatus"/>
     <view style="margin-left: 40rpx"></view>
     <text style="font-size: small; margin:20rpx; display: inline-flex">测试用：{{cardExpended ? "已展开" : "未展开"}}</text>
     <switch style="margin-top:20rpx" checked="{{cardExpended}}" bindchange="testCardExpend"/>

@@ -23,8 +23,25 @@
   overflow: hidden;
   margin-left: 40rpx;
 }
-.hover-class{
+
+.hover-class {
   background-color: #A4D3EE;
+}
+
+.warp {
+  /* background-color: #A4D3EE; */
+  /* position: absolute; */
+  display: inline-flex;
+  z-index: 2;
+  background: #fff;
+}
+
+.delete {
+  position: absolute;
+  display: inline-flex;
+  z-index: 1;
+  width: 120rpx;
+  height: 100%;
 }
 
 

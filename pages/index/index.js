@@ -23,16 +23,13 @@ Page({
     let adminUser = new wx.BaaS.TableObject('admin')
     let vipUser = new wx.BaaS.TableObject('vip')
     let query = new wx.BaaS.Query()
-
-    let regExp = new RegExp('^' + app.globalData.openId + '$')
-    // console.log(regExp.source)
-    query.matches('openid', regExp)
+    query.compare('openid', '=', app.globalData.openId)
     
     // isAdmin?
     adminUser.setQuery(query).find().then( res => {
-      let result = res.data.objects[0]  
-      if(typeof(result) == 'object') {
-        app.globalData.isAdmin = result.enabled
+      let result = res.data.objects
+      if(result.length > 0) {
+        app.globalData.isAdmin = result[0].enabled
       }
       else {
         app.globalData.isAdmin = false
@@ -47,9 +44,9 @@ Page({
 
     // isVIP?
     vipUser.setQuery(query).find().then( res => {
-      let result = res.data.objects[0]
-      if(typeof(result) == "object") {
-        app.globalData.isVIP = result.enabled
+      let result = res.data.objects
+      if(result.length > 0) {
+        app.globalData.isVIP = result[0].enabled
       }
       else {
         app.globalData.isVIP = false

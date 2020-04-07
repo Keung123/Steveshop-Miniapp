@@ -10,16 +10,23 @@ Page({
     code: null,
     codeTime: '',
     codeLength: 0,
-    codeNote: null,
+    codeNote: '',
     inviteCodeDB: null,
     codeList: [],
     codeList_active: [],
-    loading: false,
+    displayManual: false,
+    codeCopy: '',
   },
 
   bindInputBlur: function(e) {
     this.setData({
       codeNote: e.detail.value,
+    })
+  },
+
+  changeDisplayStatus: function() {
+    this.setData({
+      displayManual: false,
     })
   },
 
@@ -101,9 +108,9 @@ Page({
       this.setData({
         codeList: result,
       })
-     
-      console.log(result)
-      console.log(result.length)
+
+      console.log(this.data.codeList)
+      console.log(this.data.codeList.length)
     }, err => {
       wx.showToast({
         title: '获取失败，请重试',
@@ -113,8 +120,31 @@ Page({
     })
   },
 
+  copyCode: function(code) {
+    wx.setClipboardData({
+      data: code,
+      success: res => {
+        wx.showToast({
+          title: '邀请码已复制',
+          duration: 600          
+        })
+      },
+      fail: res => {
+        wx.showToast({
+          title: '复制失败，请手动复制',
+          icon: 'none',
+          duration: 1000
+        })
+        this.setData({
+          displayManual: true,
+          copyCode: code,
+        })
+      }
+    })
+  },
+
   bindGenerateButton: function() {
-    if(typeof(this.data.codeTime) != 'string') {
+    if(this.data.codeTime == '') {
       wx.showToast({
         title: '请填写有效时长',
         icon: 'none',
@@ -127,7 +157,10 @@ Page({
     // console.log(this.data.code)
     // console.log(this.data.codeLength)
     // console.log(this.data.codeTime)
+
     this.addDB()
+    this.copyCode(this.data.code)
+    this.fetchDB()
   },
 
   /**
@@ -137,6 +170,7 @@ Page({
     this.setData({
       inviteCodeDB: new wx.BaaS.TableObject('invitecode')
     })
+    this.fetchDB()
   },
 
   /**
