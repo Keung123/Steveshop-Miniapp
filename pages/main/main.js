@@ -1,4 +1,6 @@
 // pages/main.js
+
+import tools from '../../utils/tools.js'
 const app = getApp()
 
 Page({
@@ -60,7 +62,7 @@ Page({
     })
   },
 
-  addSubscribe: function() {
+  addSubscribe: tools.debounce(function() {
     let inviteCode = this.data.inviteCode
     console.log(inviteCode)
 
@@ -79,66 +81,72 @@ Page({
         // mark invite code used
         console.log(result[0].id)
         let record = db.getWithoutData(result[0].id)
-        record.set('used', true)
-        record.update()
-        
-        // update vip
-        let vipDB = new wx.BaaS.TableObject('vip')
-        let vipQuery = new wx.BaaS.Query()
-        vipQuery.compare('openid', '=', app.globalData.openId)
+        record.set('used', true).update().then(res => {
 
-        // check db history
-        vipDB.setQuery(vipQuery).find().then( res => {
-          let vipResult = res.data.objects
-          let newData = {
-            enabled: true,
-            openid: app.globalData.openId,
-            due_date: result[0].due_date,
-            note: this.data.userInfo.nickName,
-          }
-          // old vip
-          if(vipResult.length > 0) {
-            let newRecord = vipDB.getWithoutData(vipResult[0].id)
-            newRecord.set(newData).update().then(res => {
-              // unlock ui
-              wx.showToast({
-                title: '激活成功',
+          // update vip
+          let vipDB = new wx.BaaS.TableObject('vip')
+          let vipQuery = new wx.BaaS.Query()
+          vipQuery.compare('openid', '=', app.globalData.openId)
+
+          // check db history
+          vipDB.setQuery(vipQuery).find().then( res => {
+            let vipResult = res.data.objects
+            let newData = {
+              enabled: true,
+              openid: app.globalData.openId,
+              due_date: result[0].due_date,
+              note: this.data.userInfo.nickName,
+            }
+            // old vip
+            if(vipResult.length > 0) {
+              let newRecord = vipDB.getWithoutData(vipResult[0].id)
+              newRecord.set(newData).update().then(res => {
+                // unlock ui
+                wx.showToast({
+                  title: '激活成功',
+                })
+                this.setData({
+                  cardExpended: false
+                })
+                this.changeVIPStatus()
+              }, err => {
+                wx.showToast({
+                  title: '会员注册异常，请联系客服',
+                  icon: 'none'
+                })
+                console.log(err)
               })
-              this.setData({
-                cardExpended: false
+            }
+            // new vip
+            else {
+              let newRecord = vipDB.create()
+              newRecord.set(newData).save().then(res => {
+                // unlock ui
+                wx.showToast({
+                  title: '激活成功',
+                })
+                this.setData({
+                  cardExpended: false
+                })
+                this.changeVIPStatus()
+              }, err => {
+                wx.showToast({
+                  title: '会员注册异常，请联系客服',
+                  icon: 'none'
+                })
+                console.log(err)
               })
-              this.changeVIPStatus()
-            }, err => {
-              wx.showToast({
-                title: '会员注册异常，请联系客服',
-                icon: 'none'
-              })
-              console.log(err)
+            }
+          }, err => {
+            wx.showToast({
+              title: '会员注册异常，请联系客服',
+              icon: 'none'
             })
-          }
-          // new vip
-          else {
-            let newRecord = vipDB.create()
-            newRecord.set(newData).save().then(res => {
-              // unlock ui
-              wx.showToast({
-                title: '激活成功',
-              })
-              this.setData({
-                cardExpended: false
-              })
-              this.changeVIPStatus()
-            }, err => {
-              wx.showToast({
-                title: '会员注册异常，请联系客服',
-                icon: 'none'
-              })
-              console.log(err)
-            })
-          }
+            console.log(err)
+          })
         }, err => {
           wx.showToast({
-            title: '会员注册异常，请联系客服',
+            title: '邀请码转换失败',
             icon: 'none'
           })
           console.log(err)
@@ -158,7 +166,7 @@ Page({
       })
       console.log(err)
     })
-  },
+  }),
 
   copyKey: function() {
     wx.setClipboardData({
